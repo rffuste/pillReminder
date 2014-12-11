@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">pill Reminder</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_create_pill">CreatePillActivity</string>
+    <string name="textPillName">Pill name</string>
+    <string name="textCreatePill">Create pill</string>
+    <string name="textHour">Hour</string>
+    <string name="textDosis">Dosis</string>
+    <string name="textMonday">Monday</string>
+    <string name="textTuesday">Tuesday</string>
+    <string name="textWednesday">Wednesday</string>
+    <string name="textThursday">Monday</string>
+    <string name="textFriday">Friday</string>
+    <string name="textSaturday">Monday</string>
+    <string name="textSunday">Sunday</string>
+    <string name="textRepeatDays">Repeat days</string>
+    <string name="textCreate">Create</string>
+    <string name="textPillInsertedOK">Pill inserted OK</string>
+    <string name="textPillInsertedNOTOK">ERROR inserting pill</string>
+</resources>
+

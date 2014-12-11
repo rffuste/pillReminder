@@ -1,0 +1,66 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="rffsystems.es.pillreminder.CreatePillActivity">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/textCreate"
+        android:id="@+id/buttonCreate"
+        android:onClick="insertPill" />
+
+    <TextView
+        android:layout_below="@id/buttonCreate"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/textPillName"
+        android:id="@+id/textViewPillName"/>
+
+    <EditText
+        android:layout_below="@id/textViewPillName"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/editTextPillName"
+        android:hint="@string/textPillName" />
+
+    <TextView
+        android:layout_below="@id/editTextPillName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/textHour"
+        android:id="@+id/textViewHour"/>
+
+    <TimePicker
+        android:layout_below="@id/textViewHour"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timePickerHour"/>
+
+    <TextView
+        android:layout_below="@id/timePickerHour"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="@string/textDosis"
+        android:id="@+id/textViewDosis" />
+
+    <NumberPicker
+        android:layout_below="@id/textViewDosis"
+        android:layout_gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/numberPickerDosis"
+        android:layout_centerVertical="true"
+        android:clickable="true" />
+
+
+</RelativeLayout>
