@@ -64,7 +64,7 @@ public class MainActivity extends ListActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
                 builder.setTitle("Confirm");
-                builder.setMessage("Are you sure?");
+                builder.setMessage("Are you sure you want to delete this pill?");
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 

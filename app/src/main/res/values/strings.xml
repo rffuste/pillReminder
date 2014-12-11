@@ -20,5 +20,6 @@
     <string name="textCreate">Create</string>
     <string name="textPillInsertedOK">Pill inserted OK</string>
     <string name="textPillInsertedNOTOK">ERROR inserting pill</string>
+
 </resources>
 
