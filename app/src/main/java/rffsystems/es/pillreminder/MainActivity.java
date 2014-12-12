@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,10 +15,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.SimpleCursorAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
 import java.util.List;
+
 
 
 public class MainActivity extends ListActivity {
@@ -27,6 +28,10 @@ public class MainActivity extends ListActivity {
     private List<Pill> values;
     private ArrayAdapter<Pill> adapter;
     private Pill select;
+
+    public String MESSAGE_PILL_DETAILS_NAME = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_NAME";
+    public String MESSAGE_PILL_DETAILS_TIME = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_TIME";
+    public String MESSAGE_PILL_DETAILS_DOSIS = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_DOSIS";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +47,7 @@ public class MainActivity extends ListActivity {
         // use the SimpleCursorAdapter to show the
         // elements in a ListView
         adapter = new ArrayAdapter<Pill>(this,
-            android.R.layout.simple_list_item_1, values);
+           android.R.layout.simple_list_item_1, values);
 
 
         if (!adapter.isEmpty())
@@ -63,10 +68,10 @@ public class MainActivity extends ListActivity {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
 
-                builder.setTitle("Confirm");
-                builder.setMessage("Are you sure you want to delete this pill?");
+                builder.setTitle(select.getPillName() + ": " + getString(R.string.textConfirmDelePill));
+                builder.setMessage(getString(R.string.textDeletePillQuestion));
 
-                builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                builder.setPositiveButton(getString(R.string.textYes), new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
                         // Do nothing but close the dialog
@@ -78,7 +83,7 @@ public class MainActivity extends ListActivity {
 
                 Toast.makeText(
                         getApplicationContext(),
-                        "pill deleted",
+                        getString(R.string.textPillDeleted),
                         Toast.LENGTH_SHORT).show();
 
                 updateListView();
@@ -89,7 +94,7 @@ public class MainActivity extends ListActivity {
 
                 });
 
-                builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton(getString(R.string.textNo), new DialogInterface.OnClickListener() {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
@@ -104,6 +109,47 @@ public class MainActivity extends ListActivity {
                 return true;
             }
         });
+
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> arg0, View view, int arg2,long itemID) {
+
+
+                //View itemView = view;
+                //String fromDate = ((TextView)itemView.findViewById(R.id.fromDate)).getText().toString();
+                int position = (int) arg0.getSelectedItemId();
+
+                //obtain pill data and send it to the details/modify activity
+                select = (Pill) getListAdapter().getItem(position);
+
+
+                //open details activity os selected pill item.
+                openDetails(select);
+
+
+            }
+        });
+
+
+    }
+
+    public void openDetails(Pill p)
+    {
+        String pill_name;
+        String pill_time;
+        int pill_dosis;
+
+        pill_name = select.getPillName();
+        pill_time = select.getPillTime();
+        pill_dosis = select.getPillDosis();
+
+        Intent intent = new Intent(this, DetailsActivity.class);
+
+        intent.putExtra(MESSAGE_PILL_DETAILS_NAME, pill_name);
+        intent.putExtra(MESSAGE_PILL_DETAILS_TIME, pill_time);
+        intent.putExtra(MESSAGE_PILL_DETAILS_DOSIS, String.valueOf(pill_dosis));
+
+        startActivity(intent);
 
 
     }
@@ -159,5 +205,6 @@ public class MainActivity extends ListActivity {
 
         setListAdapter(adapter);
     }
+
 
 }
