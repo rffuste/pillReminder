@@ -24,6 +24,14 @@ public class Pill {
 
     }
 
+    public Pill(long id, String pillName, String pillTime, int pillDosis) {
+        this.id = id;
+        this.pillName = pillName;
+        this.pillTime = pillTime;
+        this.pillDosis = pillDosis;
+
+    }
+
     public long getId() {
         return id;
     }

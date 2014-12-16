@@ -61,11 +61,25 @@ public class DbManager {
         return newPill;
     }
 
-    public void deletePill(Pill comment) {
-        long id = comment.getId();
+    public void deletePill(Pill pill) {
+        long id = pill.getId();
         System.out.println("Pill deleted with id: " + id);
         database.delete(DbHelper.TABLE_PILLS, DbHelper.COLUMN_ID
                 + " = " + id, null);
+    }
+
+    public void updatePill(Pill pill) {
+        long id = pill.getId();
+
+        ContentValues data=new ContentValues();
+        data.put("_id", pill.getId());
+        data.put("name", pill.getPillName());
+        data.put("time", pill.getPillTime());
+        data.put("dosis", pill.getPillDosis());
+
+        database.update(DbHelper.TABLE_PILLS, data, "_id=" + id, null);
+
+
     }
 
     public List<Pill> getAllPills() {

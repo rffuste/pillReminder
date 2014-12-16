@@ -18,7 +18,9 @@
     <string name="textSunday">Sunday</string>
     <string name="textRepeatDays">Repeat days</string>
     <string name="textCreate">Create</string>
+    <string name="textSave">Save</string>
     <string name="textPillInsertedOK">Pill inserted OK</string>
+    <string name="textPillModifiedOK">Pill modified OK</string>
     <string name="textPillInsertedNOTOK">ERROR inserting pill</string>
     <string name="textDeletePillQuestion">Are you sure you want to delete this pill?</string>
     <string name="textYes">Yes</string>

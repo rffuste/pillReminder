@@ -29,9 +29,10 @@ public class MainActivity extends ListActivity {
     private ArrayAdapter<Pill> adapter;
     private Pill select;
 
-    public String MESSAGE_PILL_DETAILS_NAME = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_NAME";
-    public String MESSAGE_PILL_DETAILS_TIME = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_TIME";
+    public String MESSAGE_PILL_DETAILS_NAME  = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_NAME";
+    public String MESSAGE_PILL_DETAILS_TIME  = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_TIME";
     public String MESSAGE_PILL_DETAILS_DOSIS = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_DOSIS";
+    public String MESSAGE_PILL_DETAILS_ID    = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_ID";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +111,7 @@ public class MainActivity extends ListActivity {
             }
         });
 
+        /*
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> arg0, View view, int arg2,long itemID) {
@@ -129,6 +131,20 @@ public class MainActivity extends ListActivity {
 
             }
         });
+        */
+        lv.setOnItemClickListener(new android.widget.AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> myAdapter, View myView, int myItemInt, long mylng) {
+                //Toast toast = Toast.makeText(getApplicationContext(), "Hello world! "+myItemInt, Toast.LENGTH_LONG);
+                //toast.show();
+
+                //obtain pill data and send it to the details/modify activity
+                select = (Pill) getListAdapter().getItem(myItemInt);
+
+                //open details activity os selected pill item.
+                openDetails(select);
+
+            }
+        });
 
 
     }
@@ -138,13 +154,16 @@ public class MainActivity extends ListActivity {
         String pill_name;
         String pill_time;
         int pill_dosis;
+        long pill_id;
 
         pill_name = select.getPillName();
         pill_time = select.getPillTime();
         pill_dosis = select.getPillDosis();
+        pill_id = select.getId();
 
         Intent intent = new Intent(this, DetailsActivity.class);
 
+        intent.putExtra(MESSAGE_PILL_DETAILS_ID, String.valueOf(pill_id));
         intent.putExtra(MESSAGE_PILL_DETAILS_NAME, pill_name);
         intent.putExtra(MESSAGE_PILL_DETAILS_TIME, pill_time);
         intent.putExtra(MESSAGE_PILL_DETAILS_DOSIS, String.valueOf(pill_dosis));

@@ -5,9 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 
 public class DetailsActivity extends Activity {
@@ -15,18 +17,28 @@ public class DetailsActivity extends Activity {
     public String MESSAGE_PILL_DETAILS_NAME = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_NAME";
     public String MESSAGE_PILL_DETAILS_TIME = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_TIME";
     public String MESSAGE_PILL_DETAILS_DOSIS = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_DOSIS";
+    public String MESSAGE_PILL_DETAILS_ID = "rffsystems.es.pillreminder.MESSAGE_PILL_DETAILS_ID";
+
+    private DbManager datasource;
+
+    String name,time;
+    int dosis;
+    long id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        String name,time;
-        int dosis;
-
         setContentView(R.layout.activity_deatils);
+
+        datasource = new DbManager(this);
+        datasource.open();
 
         // Get the message from the intent
         Intent intent = getIntent();
+
+        String  message_id = intent.getStringExtra(MESSAGE_PILL_DETAILS_ID);
+        id = Long.parseLong(message_id);
 
         //values from main activity
         String message_pill_name = intent.getStringExtra(MESSAGE_PILL_DETAILS_NAME);
@@ -43,7 +55,10 @@ public class DetailsActivity extends Activity {
         pillTime.setCurrentHour(Utils.getHour(message_pill_time));
         pillTime.setCurrentMinute(Utils.getMinutes(message_pill_time));
 
-        pillDosis.setValue(Integer.valueOf(message_pill_dosis));
+        pillDosis.setMaxValue(9);
+        pillDosis.setMinValue(0);
+        pillDosis.setValue(Integer.parseInt(message_pill_dosis));
+
 
 
 
@@ -70,5 +85,39 @@ public class DetailsActivity extends Activity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void savePill(View view){
+
+        String pill_name;
+        String pill_time;
+        int pill_dosis;
+        Pill p;
+
+        EditText name = (EditText) findViewById(R.id.editTextPillNameDetails);
+        TimePicker time = (TimePicker) findViewById(R.id.timePickerHourDetails);
+        NumberPicker dosis = (NumberPicker) findViewById(R.id.numberPickerDosisDetails);
+
+        // get pill values to be inserted
+        pill_name = name.getText().toString();
+
+        int selectedHour=time.getCurrentHour();
+        int selectedMin =time.getCurrentMinute();
+        pill_time=selectedHour + ":" + selectedMin;
+
+        pill_dosis = dosis.getValue();
+
+        p = new Pill(id,pill_name,pill_time,pill_dosis);
+
+        datasource.updatePill(p);
+
+        Toast.makeText(
+            getApplicationContext(),
+            R.string.textPillModifiedOK,
+            Toast.LENGTH_SHORT).show();
+
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+
     }
 }

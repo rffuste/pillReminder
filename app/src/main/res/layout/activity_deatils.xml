@@ -19,9 +19,9 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/textCreate"
+        android:text="@string/textSave"
         android:id="@+id/buttonModify"
-        android:onClick="insertPill" />
+        android:onClick="savePill" />
 
     <TextView
         android:layout_width="wrap_content"
