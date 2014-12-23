@@ -1,7 +1,12 @@
 package rffsystems.es.pillreminder;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,11 +18,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import java.sql.Time;
+import java.util.Calendar;
 
 
 public class CreatePillActivity extends Activity {
 
     private DbManager datasource;
+    private AlarmManager alarmMgr;
+    private PendingIntent alarmIntent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,4 +104,6 @@ public class CreatePillActivity extends Activity {
         }
 
     }
+
+
 }

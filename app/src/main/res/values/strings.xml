@@ -29,5 +29,7 @@
     <string name="textPillDeleted">Pill deleted</string>
     <string name="title_activity_modify">ModifyActivity</string>
     <string name="textPillDetails">Pill details</string>
+    <string name="title_activity_alarm_screen">AlarmScreen</string>
+    <string name="textTakePill">Take pill</string>
 
 </resources>
